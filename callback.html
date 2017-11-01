@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <title>Brick & Mortar Shop Customer Sentiment</title>
+        <meta name="description" content="re:Invent 2017 Builder's Fair Customer Sentiment Analysis with Amazon Rekognition'">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+        <link rel="stylesheet" href="styles/style.css" />
+    </head>
+    <body>
+        <script type="text/javascript">
+
+            var TOKEN_ENDPOINT = 'https://customersentiment.auth.eu-west-1.amazoncognito.com/oauth2/token';
+            var CLIENT_ID = '83e5ucp3gbhqgn7mitjaq4mt4';
+            var CLIENT_SECRET = 'kcavgodoisncb7hiqvrvpolamgcpre8cnnfrafvfi7pqfbs0c4m';
+            var SCOPES = 'phone email openid profile aws.cognito.signin.user.admin https://customer-sentiment/agerange.read https://customer-sentiment/gender.read https://customer-sentiment/facecounts.read https://customer-sentiment/sentiment.read';
+            var REDIRECT_URI = 'https://brickandmortar.cloud-oriented.com/callback.html';
+		    //var REDIRECT_URI = 'https://localhost/~gianpo/BuildersFair/callback.html';
+            var RETURN_TO_URL = 'https://brickandmortar.cloud-oriented.com/#!/dashboard';
+            //var RETURN_TO_URL = 'https://localhost/~gianpo/BuildersFair/#!/dashboard';
+
+            // Gets a value from the querystring.
+            function getQueryStringValue (key) {  
+                return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));  
+            };
+
+            var code = getQueryStringValue("code");
+
+            if (code){                
+                var postData = 'grant_type=authorization_code&client_id=' + CLIENT_ID + '&code=' + code +
+							'&redirect_uri=' + REDIRECT_URI + '&scope=' + SCOPES;
+
+                // Exchanges authorization code to get a token.
+                $.ajax({
+                    url: TOKEN_ENDPOINT,
+                    type: "POST",
+                    headers: {
+                        'Content-Type' : 'application/x-www-form-urlencoded',
+                        'Authorization' : 'Basic ' + btoa(CLIENT_ID + ':' + CLIENT_SECRET) 
+					},
+                    data: postData,
+                    dataType:"json"
+                }).done(function(tokenData) {
+
+                    // Computing token expiration date.
+                    var expires_in_seconds = parseInt(tokenData.expires_in);
+                    var currentTime = new Date();
+                    currentTime.setSeconds(currentTime.getSeconds() + (expires_in_seconds - 60));
+                    var expires_on = moment(currentTime.getTime()).unix();
+
+                    window.sessionStorage.setItem('access_token', tokenData.access_token);
+                    window.sessionStorage.setItem('refresh_token', tokenData.refresh_token);
+                    window.sessionStorage.setItem('expires_on', expires_on);
+
+                    window.location.replace(RETURN_TO_URL);
+                });
+            }
+            else {
+                document.getElementById('errorMessage').innerText = 'Error - Missing authorization code.';
+            }
+
+        </script>
+
+        <div id="errorMessage"></div>
+    </body>
+</html>

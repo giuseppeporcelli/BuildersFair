@@ -1,0 +1,83 @@
+
+<div class="container" style="padding-top:15px;">
+
+<div class="row" style="margin-bottom:10px;">
+    <form ng-submit="startFetching()">
+        <div class="form-group-row">
+            <div class="col-sm-1">
+                <label for="fromDate" style="margin-top:4px; color:white;">Date</label>
+            </div>
+            <div class="col-sm-3">
+                <span class="input-group">
+                    <input type="text" name="fromDate" data-ng-readonly="true" class="form-control" uib-datepicker-popup="{{fromDateFormat}}" ng-model="fromDate" is-open="fromDatePopup.opened" 
+                        datepicker-options="fromDateOptions" data-ng-disabled="isAutoRefreshing" ng-required="true" close-text="Close" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="openFromDate()"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </span>
+            </div>
+            <div style="text-align:right" class="col-sm-8">
+                <div class="btn-group">
+                    <button type="button" data-ng-disabled="isAutoRefreshing" style="margin-left:0px" class="btn btn-default" ng-click="getData()">Get Data</button>
+                    <button type="button" data-ng-if="canAutoRefresh" class="btn btn-default" ng-model="isAutoRefreshing" uib-btn-checkbox data-ng-click="toggleAutoRefreshing()">Auto Refresh</label>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Sentiment</div>
+            <div class="panel-body">
+                <canvas style="height:300px" id="sentimentChart" class="chart-doughnut"
+                    chart-options="sentimentOptions"
+                    chart-data="sentimentData" chart-labels="sentimentLabels">
+                </canvas> 
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+        <div class="panel-heading">Gender</div>
+        <div class="panel-body">
+            <canvas style="height:300px" id="genderChart" class="chart-doughnut"
+                chart-options="genderOptions"
+                chart-data="genderData" chart-labels="genderLabels">
+            </canvas> 
+        </div>
+    </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-10">
+        <div class="panel panel-default">
+            <div class="panel-heading">Age Range</div>
+            <div class="panel-body">
+                <canvas id="ageRangeChart" class="chart-horizontal-bar"
+                    chart-options="ageRangeOptions"
+                    chart-data="ageRangeData" chart-labels="ageRangeLabels" >
+                </canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">Valid Faces</div>
+            <div class="panel-body" style="text-align:center">
+                <p style="font-size:xx-large">{{ validCount }}</p>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">Skipped Faces</div>
+            <div class="panel-body" style="text-align:center">
+                <p style="font-size:xx-large">{{ skippedCount }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+

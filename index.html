@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="customerSentiment" class="no-js">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Brick & Mortar Shop Customer Sentiment</title>
+  <meta name="description" content="re:Invent 2017 Builder's Fair Customer Sentiment Analysis with Amazon Rekognition'">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
+    integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700" rel="stylesheet">
+  <link rel="stylesheet" href="styles/style.css" />
+</head>
+
+<body>
+  <nav data-ng-if="!isLogin" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header" style="width: 100%">
+        <a class="navbar-brand bf-navbar-brand" href="#">
+          <img alt="AWS logo" src="images/aws_logo.png" style="height:35px">
+        </a>
+
+        <div data-ng-if="showLogoutButton" class="dropdown navbar-text" style="float:right; margin-top:8px; margin-bottom:0px; margin-right:0px;">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{ emailAddress }}
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a href="#" ng-click="logout();">Logout</a></li>
+          </ul>
+        </div>
+<!--
+
+        <p class="navbar-text" style="float: right;" data-ng-if="showLogoutButton">{{ emailAddress }}</p>
+        <button data-ng-if="showLogoutButton" type="button" class="btn btn-default" style="float: right; margin-top:8px;" ng-click="logout();">Logout</button>-->
+      </div>
+    </div>
+  </nav>
+
+  <div ng-view></div>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-touch.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-aria.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-messages.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+  <script src="scripts/angular-chart.min.js"></script>
+  <script src="scripts/ui-bootstrap-tpls.min.js"></scripT>
+  <script src="scripts/aws-sdk.min.js"></script>
+  <script src="scripts/aws-cognito-sdk.min.js"></script>
+  <script src="scripts/amazon-cognito-identity.min.js"></script>
+  <script src="scripts/jwt-decode.min.js"></script>
+  <script src="app/oauth2/oauth2.js"></script>  
+  <script src="app/oauth2/oauth2service.js"></script>
+  <script src="app/login/login.js"></script>  
+  <script src="app/login/loginController.js"></script>
+  <script src="app/dashboard/dashboard.js"></script>  
+  <script src="app/dashboard/dashboardController.js"></script>
+  <script src="app/app.js"></script>
+</body>
+
+</html>

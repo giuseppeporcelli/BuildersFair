@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title>Brick & Mortar Shop Customer Sentiment</title>
+        <meta name="description" content="re:Invent 2017 Builder's Fair Customer Sentiment Analysis with Amazon Rekognition'">
+        <link rel="stylesheet" href="styles/style.css" />
+    </head>
+    <body>
+        <script type="text/javascript">
+            var returnToURL = 'https://brickandmortar.cloud-oriented.com/#!/login';
+            //var returnToURL = 'https://localhost/~gianpo/BuildersFair/#!/login';
+
+            window.sessionStorage.removeItem('access_token');
+            window.sessionStorage.removeItem('refresh_token');
+            window.sessionStorage.removeItem('expires_on');
+            window.location.replace(returnToURL);
+        </script>
+    </body>
+</html>

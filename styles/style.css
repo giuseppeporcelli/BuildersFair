@@ -1,0 +1,29 @@
+body {
+    font-size: 16px;
+    font-size: 1.6rem;
+    color: black;
+    font-family: Roboto Condensed, Arial, sans-serif;
+    position: relative;
+    padding-top: 50px;
+
+    background: repeating-linear-gradient(
+    -45deg,
+    #444,
+    #444 2px,
+    #555 2px,
+    #555 6px
+    );
+}
+
+.bf-navbar-brand
+{
+    padding: 10px;
+}
+
+.skipped-faces {
+    font-size: x-large;
+}
+
+label {
+    font-weight: normal;
+}
